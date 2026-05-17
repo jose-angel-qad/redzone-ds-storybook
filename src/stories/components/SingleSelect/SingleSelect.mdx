@@ -1,0 +1,482 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as SingleSelectStories from './SingleSelect.stories.js';
+
+<Meta of={SingleSelectStories} />
+
+<div class="rz-component-header">
+
+# Single select
+
+<span class="rz-badge rz-badge--draft">Draft</span>
+
+</div>
+
+<div class="rz-tabs" id="rz-tabs">
+  <div class="rz-tab active" data-tab="usage">Usage</div>
+  <div class="rz-tab" data-tab="code">Code</div>
+  <div class="rz-tab" data-tab="accessibility">Accessibility</div>
+  <div class="rz-tab" data-tab="specs">Specs</div>
+  <div class="rz-tab" data-tab="resources">Resources</div>
+</div>
+
+{/* ─── USAGE ─── */}
+<div class="rz-panel active" id="panel-usage">
+
+### 1. Overview
+
+Single select lets the user pick one value from a list of options. The trigger field doubles as a search input when the list is open, which makes the component suitable for both short, fixed option sets and long datasets that require filtering.
+
+Single select is always used inside Form field, which provides label, helper text, validation messaging, and layout orientation (vertical or horizontal). Do not use Single select on its own.
+
+### 2. Usage
+
+#### 2.1 When to use
+
+- The user must choose exactly one value from a predefined set of options.
+- The option set is long enough that scanning or filtering is faster than reading every option (typically more than 7 options).
+- The selection happens inside a form or filter context where space is constrained.
+- The options are dynamic or fetched asynchronously and benefit from in-field search.
+
+#### 2.2 When not to use
+
+- The user needs to select more than one value. Use Multi-select instead.
+- The option set has 5 or fewer mutually exclusive options that fit in the layout. Use Segment-buttons instead, which exposes all options without an extra click.
+- The user needs to enter a free-text value that is not in a predefined list. Use Text input or Combobox with custom entry.
+- The selection is binary. Use Toggle or Checkbox.
+
+#### 2.3 Composition
+
+Single select is an atomic component. It does not include a label, helper text, or validation message on its own. It must always be wrapped in Form field, which owns those elements and the field's overall orientation. See Form field for label, helper text, validation, and orientation rules.
+
+### 3. Anatomy
+
+<div class="rz-layout-a">
+  <img src="/single-select/anatomy-closed.png" alt="Anatomy closed" />
+  <div class="rz-layout-a__text">
+    <p><strong>1. Desktop/Single-select</strong></p>
+    <p>Height: 32</p> 
+    <p>Width: fill</p>
+    <p><strong>2. field</strong></p>
+    <p>Holds the field structure and defines the interactive area.</p> 
+    <p>Height: 32</p>
+    <p>Border weight: <code>semantic/border/width/standard</code></p>
+    <p>Border radius: <code>semantic/border/radius/control/md</code></p>
+    <p><strong>3. Text</strong></p>
+    <p>Displays the placeholder, the typed search query, or the selected value.</p>
+    <p><strong>4. icon/keyboard_arrow_down</strong></p>
+    <p>Indicates open/closed state and rotates on toggle. Depends on: <code>icon/keyboard_arrow_down</code></p>
+    <p><strong>5. Desktop/Option-list</strong></p>
+    <p>Has bottom bar: false</p> 
+    <p>Has search bar: false</p> 
+    <p>See Desktop/Option-list for full anatomy.</p> 
+    <p>Depends on: <code>Desktop/Option-list</code></p>
+    <p><strong>6. Desktop/Insert-point</strong></p>
+    <p>Depends on: <code>Desktop/Insert-point</code></p> 
+    <p>Status: On</p>
+    <p><strong>7. Desktop/Icon-action (Icon/Cancel)</strong></p>
+    <p>Depends on: <code>Desktop/Icon-action</code></p> 
+    <p>Appears only when the field holds a selected value. Clicking it clears the value and returns the field to Default.</p>
+  </div>
+</div>
+
+
+### 4. Variants
+
+#### 4.1 With leading icon
+
+<div class="rz-layout-a">
+  <img src="/single-select/variant-leading-icon.png" alt="With leading icon" />
+  <div class="rz-layout-a__text">
+    <p>The field supports an optional icon to the left of the text. Use it when the options belong to a category that is consistently represented by an icon.</p>
+  </div>
+</div>
+
+#### 4.2 Platform variants
+<div class="rz-layout-a">
+  <img src="/single-select/empty-space.png" alt="With leading icon" />
+  <div class="rz-layout-a__text">
+    <p>Tablet and mobile variants exist as separate components because the interaction model differs. They are documented separately.</p>
+  </div>
+</div>
+
+#### 4.3 Dropdown direction
+
+<div class="rz-layout-b">
+  <div class="rz-layout-b__col">
+    <h4>Down</h4>
+    <p>If the trigger is located near the top of the viewport, the select opens downward.</p>
+    <img src="/single-select/dropdown-direction-down.png" alt="Dropdown direction down" />
+  </div>
+  <div class="rz-layout-b__col">
+    <h4>Up</h4>
+    <p>If the trigger is located near the bottom of the viewport, the select opens upward.</p>
+    <img src="/single-select/dropdown-direction-up.png" alt="Dropdown direction up" />
+  </div>
+</div>
+
+### 5. States
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-default.png" alt="Default state" />
+  <div class="rz-layout-a__text">
+    <h4>Default</h4>
+    <p>Background color: <code>semantic/color/background/field/subtle/default</code></p>
+    <p>Border color: <code>semantic/color/border/field/subtle/default</code></p>
+    <p>Drop shadow: <code>elevation/Shadows/no</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-hover.png" alt="Hover state" />
+  <div class="rz-layout-a__text">
+    <h4>Hover</h4>
+    <p>Background color: <code>semantic/color/background/field/subtle/hover</code></p>
+    <p>Border color: <code>semantic/color/border/field/subtle/hover</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-active.png" alt="Active state" />
+  <div class="rz-layout-a__text">
+    <h4>Active</h4>
+    <p>Background color: <code>semantic/color/background/field/subtle/active</code></p>
+    <p>Border color: <code>semantic/color/border/field/subtle/active</code></p>
+    <p>Inner shadow: <code>elevation/Inner-shadow/xs-subtle</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-focused.png" alt="Focused state" />
+  <div class="rz-layout-a__text">
+    <h4>Focused</h4>
+    <p>Background color: <code>semantic/color/background/field/subtle/focused</code></p>
+    <p>Border color: <code>semantic/color/border/field/subtle/focused</code></p>
+    <p>Drop shadow: <code>Border/Focused</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-error.png" alt="Error state" />
+  <div class="rz-layout-a__text">
+    <h4>Error</h4>
+    <p>Border color: <code>semantic/color/border/field/danger</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/states-disabled.png" alt="Disabled state" />
+  <div class="rz-layout-a__text">
+    <h4>Disabled</h4>
+    <p>Background color: <code>semantic/color/background/field/subtle/disabled</code></p>
+    <p>Border color: <code>semantic/color/border/field/subtle/disabled</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/state-first-load.png" alt="First load state" />
+  <div class="rz-layout-a__text">
+    <h4>First load</h4>
+    <p>When the Option list opens for the first time, a loader is shown inside the Option list while results are fetched. The field remains in its focused state.</p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/state-searching.png" alt="Searching state" />
+  <div class="rz-layout-a__text">
+    <h4>Searching</h4>
+    <p>When the user types in the field, a small loader appears inside the field next to the chevron, and the Option list shows a loader while filtering results are fetched.</p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/state-no-results.png" alt="No results state" />
+  <div class="rz-layout-a__text">
+    <h4>No results found</h4>
+    <p>When a search returns no matches, the Option list displays a "No results found" empty state with the helper copy "Try changing your search criteria."</p>
+  </div>
+</div>
+
+### 6. Do's and Don'ts
+
+<div class="rz-layout-c">
+  <div class="rz-do">
+    <img src="/single-select/do-form-field.png" alt="Do — use inside Form field" />
+    <div class="rz-do__label">
+      <img src="/do-icon.svg" alt="Do" />
+      <p><strong>Do</strong> use Single select inside Form field so the field receives label, helper text, and validation messaging consistently.</p>
+    </div>
+  </div>
+  <div class="rz-dont">
+    <img src="/single-select/dont-standalone.png" alt="Don't — use standalone" />
+    <div class="rz-dont__label">
+      <img src="/dont-icon.svg" alt="Don't" />
+      <p><strong>Don't</strong> use Single select on its own. It is always wrapped in Form field.</p>
+    </div>
+  </div>
+</div>
+
+<div class="rz-layout-c">
+  <div class="rz-do">
+    <img src="/single-select/do-truncate.png" alt="Do — truncate long values" />
+    <div class="rz-do__label">
+      <img src="/do-icon.svg" alt="Do" />
+      <p><strong>Do</strong> truncate the selected value with ellipsis when it exceeds the available field width. The full value remains accessible via tooltip on hover and in the Option list.</p>
+    </div>
+  </div>
+  <div class="rz-dont">
+    <img src="/single-select/dont-few-options.png" alt="Don't — few options" />
+    <div class="rz-dont__label">
+      <img src="/dont-icon.svg" alt="Don't" />
+      <p><strong>Don't</strong> use Single select for option sets with fewer than 6 items when space is available. Segment-buttons exposes the choices directly and reduces interaction cost.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{/* ─── CODE ─── */}
+<div class="rz-panel" id="panel-code">
+
+<div class="rz-code-placeholder">
+  <strong>Component pending implementation</strong>
+  <p>The Vue component for Single select is under development. Code examples, props, and slots will be documented here once the component is available.</p>
+</div>
+
+</div>
+
+{/* ─── ACCESSIBILITY ─── */}
+<div class="rz-panel" id="panel-accessibility">
+
+### WCAG criteria
+
+<div class="rz-wcag-item">
+
+**1.4.3 Contrast (Minimum)**
+Text, placeholder, icons, and the field border must meet a contrast ratio of at least 4.5:1 against the background in default, hover, and focused states. [Read more](https://www.w3.org/TR/WCAG21/#contrast-minimum)
+</div>
+<div class="rz-wcag-item">
+
+**1.4.11 Non-text Contrast**
+The field border, chevron, and focus indicator must maintain a contrast ratio of at least 3:1 against adjacent colors. This applies because the boundary of the control communicates its interactive nature and its current state. [Read more](https://www.w3.org/TR/WCAG21/#non-text-contrast)
+</div>
+<div class="rz-wcag-item">
+
+**2.1.1 Keyboard**
+All functionality of Single select must be operable through a keyboard interface. This applies because the component is a primary input control and must be usable without a pointing device. [Read more](https://www.w3.org/TR/WCAG21/#keyboard)
+</div>
+<div class="rz-wcag-item">
+
+**2.4.7 Focus Visible**
+The focused state of the field must be visually distinguishable from the default and hover states. This applies because keyboard users rely on a clear focus indicator to track their position in the form. [Read more](https://www.w3.org/TR/WCAG21/#focus-visible)
+</div>
+<div class="rz-wcag-item">
+
+**3.3.1 Error Identification**
+Error messaging is owned by Form field. Single select contributes only the visual error border. See Form field for full error identification compliance.
+</div>
+<div class="rz-wcag-item">
+
+**4.1.2 Name, Role, Value**
+The field must expose its role as a combobox, its current value, its expanded/collapsed state, and the active option to assistive technologies. This applies because the component combines a text input with a popup list, which screen readers must announce correctly. [Read more](https://www.w3.org/TR/WCAG21/#name-role-value)
+
+</div>
+
+### Keyboard behavior
+
+<table>
+  <thead>
+    <tr><th>Key</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tab</td><td>Move focus to the field.</td></tr>
+    <tr><td>Shift + Tab</td><td>Move focus out of the field.</td></tr>
+    <tr><td>Enter / Space</td><td>Open the Option list when closed.</td></tr>
+    <tr><td>Arrow Down</td><td>Open the Option list when closed; move focus to the next option when open.</td></tr>
+    <tr><td>Arrow Up</td><td>Open the Option list when closed; move focus to the previous option when open.</td></tr>
+    <tr><td>Enter</td><td>Select the focused option and close the Option list.</td></tr>
+    <tr><td>Esc</td><td>Close the Option list without changing the selection.</td></tr>
+    <tr><td>Type</td><td>Filter the Option list in real time.</td></tr>
+  </tbody>
+</table>
+
+</div>
+
+{/* ─── SPECS ─── */}
+<div class="rz-panel" id="panel-specs">
+
+### 1. Spacing & layout
+
+<div class="rz-layout-a">
+  <img src="/single-select/specs-spacing.png" alt="Spacing — overview" />
+  <div class="rz-layout-a__text">
+    <h4>Single-select</h4>
+    <p>Direction: Vertical</p>
+    <p>Alignment: Top right</p>
+    <p>Vertical resizing: Fixed</p>
+    <p>Horizontal resizing: Fill</p>
+    <p>Item spacing: <code>semantic/spacing/gap/xs</code></p>
+    <p>Padding: <code>semantic/spacing/padding/none</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/specs-spacing-paddings.png" alt="Spacing — field" />
+  <div class="rz-layout-a__text">
+    <h4>Field</h4>
+    <p>Direction: Horizontal</p>
+    <p>Alignment: Middle left</p>
+    <p>Vertical resizing: Fixed</p>
+    <p>Horizontal resizing: Fill</p>
+    <p>Item spacing: <code>semantic/spacing/gap/none</code></p>
+    <p>Padding top: <code>semantic/spacing/padding/xs</code></p>
+    <p>Padding bottom: <code>semantic/spacing/padding/xs</code></p>
+    <p>Padding left: <code>semantic/spacing/padding/sm</code></p>
+    <p>Padding right: <code>semantic/spacing/padding/md</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/specs-spacing-constrains.png" alt="Spacing — text label" />
+  <div class="rz-layout-a__text">
+    <h4>Text-label</h4>
+    <p>Direction: Horizontal</p>
+    <p>Alignment: Middle left</p>
+    <p>Vertical resizing: Hug</p>
+    <p>Horizontal resizing: Fill</p>
+    <p>Item spacing: <code>semantic/spacing/gap/none</code></p>
+  </div>
+</div>
+
+<div class="rz-layout-a">
+  <img src="/single-select/specs-spacing-box.png" alt="Spacing — 4px space" />
+  <div class="rz-layout-a__text">
+    <h4>4px-space</h4>
+    <p>Direction: Vertical</p>
+    <p>Alignment: Top left</p>
+    <p>Vertical resizing: Hug</p>
+    <p>Horizontal resizing: Fixed</p>
+  </div>
+</div>
+
+### 2. Motion
+
+Motion in Single select signals the relationship between the field and the Option list. The list emerges from the field on open and returns to it on close, so the user understands where the options came from. The transition is short to avoid delaying selection.
+
+#### 2.1 Behavior
+
+<table>
+  <thead>
+    <tr><th>Action</th><th>Change to</th><th>Animate</th><th>Curve</th><th>Duration</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Click on field (closed)</td><td>Expanded</td><td>Smart animate</td><td>0.25, 1, 0.5, 1 (Ease Out Cubic)</td><td>240ms</td></tr>
+    <tr><td>Click on field (open), Esc, or outside click</td><td>Collapsed</td><td>Smart animate</td><td>0.25, 1, 0.5, 1 (Ease Out Cubic)</td><td>160ms</td></tr>
+  </tbody>
+</table>
+
+#### 2.2 Properties animated
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Collapse</th><th>Expand</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Option list - opacity</td><td>1 → 0</td><td>0 → 1</td></tr>
+    <tr><td>Option list - translateY (opening down)</td><td>0 → -4px</td><td>-4px → 0</td></tr>
+    <tr><td>Option list - translateY (opening up)</td><td>0 → 4px</td><td>4px → 0</td></tr>
+    <tr><td>Option list - height</td><td>auto → 0</td><td>0 → auto</td></tr>
+    <tr><td>Chevron - rotation</td><td>180° → 0°</td><td>0° → 180°</td></tr>
+  </tbody>
+</table>
+
+</div>
+
+{/* ─── RESOURCES ─── */}
+<div class="rz-panel" id="panel-resources">
+
+### Resources
+
+<div class="rz-resources">
+  <a class="rz-resource-item" href="https://www.figma.com/design/h49dNwkGrGNgp7UDFpqu0s/Web-Design-System?node-id=9037-87997&t=8CjXqMn9dldawvHX-1" target="_blank">
+    <div class="rz-resource-item__icon">🎨</div>
+    <div class="rz-resource-item__text">
+      <strong>Figma file</strong>
+      <span>View the Single select component in Figma</span>
+    </div>
+  </a>
+</div>
+
+### Metadata
+
+<div class="rz-metadata">
+  <div class="rz-metadata-item">
+    <p class="rz-metadata-item__label">Version</p>
+    <p class="rz-metadata-item__value">1.0</p>
+  </div>
+  <div class="rz-metadata-item">
+    <p class="rz-metadata-item__label">Status</p>
+    <p class="rz-metadata-item__value">Draft</p>
+  </div>
+  <div class="rz-metadata-item">
+    <p class="rz-metadata-item__label">Last updated</p>
+    <p class="rz-metadata-item__value">May 15, 2026</p>
+  </div>
+  <div class="rz-metadata-item">
+    <p class="rz-metadata-item__label">Dependencies</p>
+    <p class="rz-metadata-item__value">Desktop/Option-list, Desktop/List-item, Desktop/Insert-point</p>
+  </div>
+</div>
+
+</div>
+
+<script>{`
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.rz-tab');
+    const panels = document.querySelectorAll('.rz-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById('panel-' + target);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  });
+  
+`}</script>
+
+<script>{`
+  const initCopyLinks = () => {
+    const headings = document.querySelectorAll('.sbdocs-wrapper h2');
+    if (headings.length === 0) {
+      setTimeout(initCopyLinks, 500);
+      return;
+    }
+    headings.forEach(heading => {
+      if (heading.dataset.copyInit) return;
+      heading.dataset.copyInit = 'true';
+      heading.style.position = 'relative';
+      heading.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+      });
+      const btn = document.createElement('span');
+      btn.className = 'rz-copy-btn';
+      btn.innerText = 'Copy link';
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigator.clipboard.writeText(window.location.href.split('#')[0] + '#' + heading.id).then(() => {
+          btn.innerText = 'Copied!';
+          btn.style.background = 'rgba(54, 179, 126, 0.8)';
+          btn.style.display = 'flex';
+          setTimeout(() => { btn.innerText = 'Copy link'; btn.style.background = 'rgba(0,0,0,0.6)'; btn.style.display = ''; }, 2000);
+        });
+      });
+      heading.appendChild(btn);
+    });
+  };
+  setTimeout(initCopyLinks, 800);
+`}</script>
